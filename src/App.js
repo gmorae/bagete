@@ -42,14 +42,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container col-md-6 mt-5">
         <ToastContainer />
-        <h5>Total em reais até agora: {this.format(this.state.totalReais)}</h5>
-        <h5>Total em unidades até agora: {this.state.totalBaguete}</h5>
+        <div className="d-flex justify-content-between mb-3">
+          <h5>Total em reais até agora: {this.format(this.state.totalReais)}</h5>
+          <h5>Total em unidades até agora: {this.state.totalBaguete}</h5>
+        </div>
         <main id="app">
           <form onSubmit={this.up}>
-            <input type="text" placeholder="Quantidade" onChange={e => this.setState({ qtd: e.target.value })} />
-            <button type="submit">Cadastrar</button>
+            <input type="text" className="form-control mb-2" placeholder="Quantidade" onChange={e => this.setState({ qtd: e.target.value })} />
+            <button type="submit" className="btn btn-primary">Cadastrar</button>
           </form>
         </main>
       </div>
