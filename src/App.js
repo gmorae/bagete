@@ -39,14 +39,14 @@ class App extends React.Component {
   };
 
   format = value => Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
-
+  formatDecimal = value => Intl.NumberFormat('pt-BR', {style: 'decimal'}).format(value)
   render() {
     return (
       <div className="container col-md-6 mt-5">
         <ToastContainer />
         <div className="d-flex justify-content-between mb-3">
           <h5>Total em reais até agora: {this.format(this.state.totalReais)}</h5>
-          <h5>Total em unidades até agora: {this.state.totalBaguete}</h5>
+          <h5>Total em unidades até agora: {this.formatDecimal(this.state.totalBaguete)}</h5>
         </div>
         <main id="app">
           <form onSubmit={this.up}>
