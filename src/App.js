@@ -1,7 +1,8 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-
+import { get } from './services/getData'
+import { post } from './services/post'
 
 class App extends React.Component {
 
@@ -16,6 +17,14 @@ class App extends React.Component {
       totalBaguete: 0,
       dados: []
     }
+  }
+
+  componentDidMount = async () => {
+    const retorno = await get()
+    const dados = retorno.data;
+    this.setState({ dados: dados.data });
+    this.setState({ totalReais: dados.total });
+    this.setState({ totalBaguete: dados.qtd });
   }
 
 
@@ -35,11 +44,15 @@ class App extends React.Component {
       this.setState({ totalBaguete: totalBaguete + +qtd })
       document.querySelector('#app input').value = ''
       toast.success('Cadastrado com sucesso')
+      let total = value      
+      post(qtd, total)
     }
   };
 
   format = value => Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
-  formatDecimal = value => Intl.NumberFormat('pt-BR', {style: 'decimal'}).format(value)
+
+  formatDecimal = value => Intl.NumberFormat('pt-BR', { style: 'decimal' }).format(value)
+
   render() {
     return (
       <div className="container col-md-6 mt-5">
